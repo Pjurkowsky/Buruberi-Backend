@@ -15,6 +15,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -46,7 +47,7 @@ public class Order {
     private int amount;
 
     @CreationTimestamp
-    private Date createdDate;
+    private LocalDateTime createdDate;
 
     @Column(nullable = false)
     @NotNull(message = "deliveryDate field is required")
