@@ -1,6 +1,7 @@
 package com.example.buruberiapp.order;
 
 import com.example.buruberiapp.customer.Customer;
+import com.example.buruberiapp.driver.Driver;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
@@ -34,8 +35,16 @@ public class Order {
     private Customer customer;
 
     @Column(nullable = false)
-    @NotBlank(message = "address field is required")
-    private String address;
+    @NotBlank(message = "street field is required")
+    private String street;
+
+    @Column(nullable = false)
+    @NotBlank(message = "apartmentNumber field is required")
+    private String apartmentNumber;
+
+    @Column(nullable = false)
+    @NotBlank(message = "zipCode field is required")
+    private String zipCode;
 
     @Column(nullable = false)
     @NotBlank(message = "city field is required")
@@ -53,7 +62,12 @@ public class Order {
     @NotNull(message = "deliveryDate field is required")
     private LocalDate deliveryDate;
 
-    private Boolean completed = false;
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
 
     private String description = "";
+
+    @ManyToOne
+    @JoinColumn(name = "driver_id")
+    private Driver driver;
 }
